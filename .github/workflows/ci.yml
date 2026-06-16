@@ -20,7 +20,6 @@ jobs:
     uses: jenistenxavier/Open-Source-Summit-India-Demo/.github/workflows/reusable-ci.yml@main
     with:
       language: node
-      image-name: inventory-service
       project-key: inventory-service
     secrets: inherit
 
