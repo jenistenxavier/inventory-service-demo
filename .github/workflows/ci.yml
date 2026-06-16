@@ -1,0 +1,37 @@
+# The ENTIRE CI config for this repo. One line inherits every org security gate,
+# the release pipeline, and the AI layer. "Secure by default."
+name: ci
+
+on:
+  push :
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize]
+
+# The embedded DevOps agent (in reusable-ci) commits fixes/bumps and comments on PRs.
+# These permissions cap the GITHUB_TOKEN the agent uses to push.
+# Requires repo/org secret: ANTHROPIC_API_KEY (flows down via `secrets: inherit`).
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  ci:
+    uses: jenistenxavier/Open-Source-Summit-India-Demo/.github/workflows/reusable-ci.yml@main
+    with:
+      language: node
+      image-name: inventory-service
+      project-key: inventory-service
+    secrets: inherit
+
+  release:
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    uses: jenistenxavier/Open-Source-Summit-India-Demo/.github/workflows/reusable-release.yml@main
+    with:
+      image-name: inventory-service
+    secrets: inherit
