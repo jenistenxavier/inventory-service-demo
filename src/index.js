@@ -19,12 +19,12 @@ app.get("/error", (_req, res) => res.status(500).json({ error: "internal error" 
 // Duplicated/needlessly-nested logic Sonar flags; the AI agent proposes the fix.
 app.get("/inventory/:id", (req, res) => {
   let found = null;
-  for (const item of inventory) {
-    if (item.id == req.params.id) {   // smell: == not ===
-      found = item;
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory[i].id == req.params.id) {   // smell: == not ===
+      found = inventory[i];
     }
   }
-  if (found) {
+  if (found != null) {
     res.json(found);
   } else {
     res.status(404).json({ error: "not found" });
