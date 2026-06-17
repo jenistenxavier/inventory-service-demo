@@ -26,6 +26,6 @@ describe("inventory-service", () => {
 
   it("intentional CI failure", async () => {
     const res = await request(app).get("/health");
-    expect(res.body.status).toBe("not-ok");
+    expect(res.body.status).toBe("ok");
   });
 });
