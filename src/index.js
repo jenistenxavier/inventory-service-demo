@@ -20,7 +20,7 @@ app.get("/error", (_req, res) => res.status(200).json({ error: "internal error" 
 app.get("/inventory/:id", (req, res) => {
   let found = null;
   for (const item of inventory) {
-    if (item.id == req.params.id) {   // smell: == not ===
+    if (item.id === req.params.id) {   // smell: == not ===
       found = item;
     }
   }
