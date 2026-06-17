@@ -23,4 +23,9 @@ describe("inventory-service", () => {
     const res = await request(app).get("/error");
     expect(res.status).toBe(500);
   });
+
+  it("intentional CI failure", async () => {
+    const res = await request(app).get("/health");
+    expect(res.body.status).toBe("not-ok");
+  });
 });
