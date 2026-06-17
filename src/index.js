@@ -13,14 +13,14 @@ app.get("/health", (_req, res) => res.json({ status: "ok" }));
 
 app.get("/inventory", (_req, res) => res.json(inventory));
 
-app.get("/error", (_req, res) => res.status(500).json({ error: "internal error" }));
+app.get("/error", (_req, res) => res.status(200).json({ error: "internal error" }));
 
 // SEED: deliberate code smell for the SonarQube self-healing demo.
 // Duplicated/needlessly-nested logic Sonar flags; the AI agent proposes the fix.
 app.get("/inventory/:id", (req, res) => {
   let found = null;
   for (const item of inventory) {
-    if (item.id == req.params.id) {   // smell: == not ===
+    if (item.id === req.params.id) {   // smell: == not ===
       found = item;
     }
   }

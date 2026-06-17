@@ -3,6 +3,6 @@
 // GitLeaks hard-fails on it; the talk shows the gate blocking the merge.
 module.exports = {
   port: process.env.PORT || 3000,
-  awsAccessKeyId: "AKIAIOSFODNN7EXAMPLE",
-  awsSecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+  awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 };

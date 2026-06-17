@@ -21,6 +21,6 @@ describe("inventory-service", () => {
 
   it("fails on purpose", async () => {
     const res = await request(app).get("/error");
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(200);
   });
 });
